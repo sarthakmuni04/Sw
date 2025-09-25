@@ -9,10 +9,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use("/api/auth", authRoutes)
+app.use(express.json({ limit: "10mb" })); // to parse the body of the request
 
-app.listen(PORT, ()=>{
-    console.log("Server is Running on http://localhost:" + PORT);
+app.use("/api/auth", authRoutes);
 
-    connectDB();
+app.listen(PORT, () => {
+  console.log("Server is Running on http://localhost:" + PORT);
+
+  connectDB();
 });
